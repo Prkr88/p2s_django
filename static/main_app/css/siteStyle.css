@@ -1,0 +1,65 @@
+
+#brand {
+    color: midnightblue;
+}
+
+#main_h {
+    text-align: center;
+}
+
+.grow {
+    transition: all .2s ease-in-out;
+}
+
+.grow:hover {
+    transform: scale(1.1);
+}
+
+.img_left {
+    margin-left: -10px;
+}
+
+.img_right {
+    margin-left: 10px;
+}
+
+.date {
+    color: white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: darkgray;
+    text-shadow: 2px 2px 2px #000000;
+}
+
+.colored_header {
+    color: #00A8E8;
+    text-shadow: 2px 2px 2px #000000;
+}
+#section{
+    margin-top: -10%;
+}
+svg {
+    background-image: url('/static/main_app/site_media/images/colombus.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    max-width: 900px;
+    width: 90%;
+}
+
+path {
+    stroke: #00A8E8;
+    stroke-width: 2px;
+    fill: rgba(157, 52, 20, 0.4);
+    cursor: pointer;
+    transition: fill 0.2s
+}
+
+svg a:focus,
+svg a:hover {
+    outline: none;
+}
+
+svg a:focus path,
+svg a:hover path {
+    fill: rgba(30, 222, 121, 0.25);
+    cursor: pointer;
+}

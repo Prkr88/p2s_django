@@ -1,0 +1,30 @@
+{% extends "main_app/base.html" %}
+
+{% block body_block %}
+    <br>
+    <h1 id="main_h">P2S Main Page</h1>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+    <div class="row equal-height  d-flex justify-content-center">
+        <div class="img_left col-xs-6 col-md-3">
+            <div class="thumbnail">
+                <h2 align="center">Fleet Status:</h2>
+                <a href="{% url 'main_app:fleet_status' %}">
+                <img src="/static/main_app/site_media/images/fleet_status.png" class=" grow img-thumbnail">
+                </a>
+            </div>
+        </div> <!-- /.col-xs-6.col-md-3 -->
+
+        <div class="img_right col-xs-6 col-md-3">
+            <div class="thumbnail">
+                <h2 align="center">Order Parts:</h2>
+                <a href="{% url 'main_app:select_section' %}">
+                <img src="/static/main_app/site_media/images/order_parts_img.png" class=" grow img-thumbnail">
+                </a>
+            </div>
+        </div> <!-- /.col-xs-6.col-md-3 -->
+    </div>
+</div>
+{% endblock %}
