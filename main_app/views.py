@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from main_app.forms import UserForm
+from main_app.models import Item,Ship,Ship_Type
 
 # Extra Imports for the Login and Logout Capabilities
 from django.contrib.auth import authenticate, login, logout
@@ -61,11 +62,20 @@ def user_login(request):
 
 
 def order_parts(request):
-    return render(request, 'main_app/order_parts.html')
+    part_list = Item.objects.order_by('item_name')
+    part_dict = {"part_list": part_list}
+    return render(request, 'main_app/order_parts.html',part_dict)
 
 
 def fleet_status(request):
-    return render(request, 'main_app/fleet_status.html')
+    ships = Ship.objects.all()
+    type_list = {}
+    for ship in ships:
+        type_list[ship.type] = {}
+    for ship in ships:
+        type_list[ship.type][ship] = {'status': ship.status, 'ship_nm:': ship.n_m}
+    type_dict = {"type_list": type_list}
+    return render(request, 'main_app/fleet_status.html',type_dict)
 
 
 def select_section(request):

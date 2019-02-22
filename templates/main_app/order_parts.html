@@ -3,37 +3,53 @@
     <br>
     <div class="container">
         <div class="jumbotron">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                </tbody>
-            </table>
-
+            <h1 class="text-center">Available Parts</h1>
+            <br>
+            {% if part_list %}
+                <table class="table table-striped">
+                    <thead class="text-center">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Part Name</th>
+                        <th scope="col">Part ID</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Pic</th>
+                        <th scope="col">Add</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for part in part_list %}
+                        <tr id="tr_{{ part.item_id }}" class="text-center ">
+                            <td class="align-middle" scope="row">{{ forloop.counter }} {# starting index 1 #}</td>
+                            <td class="align-middle">{{ part.item_name }}</td>
+                            <td class="align-middle">{{ part.item_id }}</td>
+                            <td class="align-middle">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1"></label>
+                                    <select class="form-control" id="exampleFormControlSelect1"
+                                            onfocus='this.size=10;' onblur='this.size=1;'
+                                            onchange='this.size=1; this.blur();'>
+                                        {% for i in i|rjust:part.item_quantity %}
+                                            <option>
+                                                {{ forloop.counter0 }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </td>
+                            <td class="align-middle">
+                                <img src="/{{ part.item_picture }}" alt="part_pic" class="img-thumbnail">
+                            </td>
+                            <td style="width: 16.66%" class="align-middle">
+                                <button id="btn_{{ part.item_id }}" class="btn btn-warning add_btn">Add</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No Access Records. Table Not Created.</p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

@@ -12,9 +12,9 @@
     <body>
     <br>
     <div class="container d-flex justify-content-center">
-        <div class="jumbotron w-50 h-50 " align="center">
+        <div class="jumbotron w-40 h-40 " align="center">
             <h1 id="section">Select Section</h1>
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 600 600">
+            <svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 600 600">
                 <g>
                     <a xlink:href="https://www.littletikes.com/item/612060/cozy-coupe-30th-anniversary-edition/1.html"
                        target="_blank">
@@ -36,6 +36,11 @@
                     </a>
                 </g>
             </svg>
+            <br>
+            <br>
+            <a href="{% url 'main_app:order_parts' %}">
+                <button class="btn btn-info">View All Part Available</button>
+            </a>
         </div>
     </div>
 

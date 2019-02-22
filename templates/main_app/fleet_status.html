@@ -7,32 +7,43 @@
             <br>
             <h1 class="colored_header" align="center">FLEET STATUS</h1>
             <br>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">S.N</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">N.M</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                </tr>
-                </tbody>
-            </table>
+            {% if type_list %}
+                {% for type,ships in type_list.items %}
+                    <div align="center" class="container">
+                        <img class="img-thumbnail" src="/{{ type.type_pic }}" alt="type_pic" style="width: 30%">
+                    </div>
+                    <table class="table table-striped">
+                        <thead class="text-center">
+                        <tr>
+                            <th scope="col">S.N</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">N.M</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for ship in ships %}
+                            <tr class="text-center ">
+                                <th class="align-middle" scope="row">{{ ship.ship_id }}</th>
+                                <td>
+                                    {% if ship.status == "ok" %}
+                                        <img style="width: 10%" src="/static/main_app/site_media/images/ok.png" alt="stat_pic">
+                                    {% elif ship.status == "service" %}
+                                        <img style="width: 10%" src="/static/main_app/site_media/images/service.png" alt="stat_pic">
+                                    {% else %}
+                                        <img style="width: 10%" src="/static/main_app/site_media/images/out_of_order.png" alt="stat_pic">
+                                    {% endif %}
+                                </td>
+                                <td class="align-middle">{{ ship.n_m }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <br>
+                    <br>
+                {% endfor %}
+            {% else %}
+                <p>No Access Records. Table Not Created.</p>
+            {% endif %}
 
         </div>
     </div>
