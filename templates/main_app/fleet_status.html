@@ -22,9 +22,9 @@
                         </thead>
                         <tbody>
                         {% for ship in ships %}
-                            <tr class="text-center ">
+                            <tr class="fleet_tbl_row text-center">
                                 <th class="align-middle" scope="row">{{ ship.ship_id }}</th>
-                                <td>
+                                <td >
                                     {% if ship.status == "ok" %}
                                         <img style="width: 10%" src="/static/main_app/site_media/images/ok.png" alt="stat_pic">
                                     {% elif ship.status == "service" %}

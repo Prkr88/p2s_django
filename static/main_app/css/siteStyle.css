@@ -67,3 +67,12 @@ svg a:hover path {
 #login{
    text-align: left ;
 }
+
+
+#tbl_r tr:hover {
+    background-color:yellow;
+}
+
+#view_cart{
+    display: none;
+}

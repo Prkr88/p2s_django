@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from main_app.forms import UserForm
-from main_app.models import Item,Ship,Ship_Type
-
+from main_app.models import Item, Ship, Ship_Type
+import json
 # Extra Imports for the Login and Logout Capabilities
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -9,6 +9,8 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 logged_in = False
+order_dict = {}  # GLOBAL ORDER Dict {itemID:Qty}
+
 
 # Create your views here.
 def index(request):
@@ -18,6 +20,7 @@ def index(request):
     else:
         form = UserForm()
         return render(request, 'main_app/login.html', {'form': form})
+
 
 @login_required
 def user_logout(request):
@@ -57,14 +60,14 @@ def user_login(request):
             return HttpResponse("Invalid login details supplied.")
 
     else:
-        #Nothing has been provided for username or password.
-        return render(request, 'main_app/login.html', {'form':form})
+        # Nothing has been provided for username or password.
+        return render(request, 'main_app/login.html', {'form': form})
 
 
 def order_parts(request):
     part_list = Item.objects.order_by('item_name')
     part_dict = {"part_list": part_list}
-    return render(request, 'main_app/order_parts.html',part_dict)
+    return render(request, 'main_app/order_parts.html', {'part_list':part_list,'order_dict':order_dict})
 
 
 def fleet_status(request):
@@ -75,8 +78,25 @@ def fleet_status(request):
     for ship in ships:
         type_list[ship.type][ship] = {'status': ship.status, 'ship_nm:': ship.n_m}
     type_dict = {"type_list": type_list}
-    return render(request, 'main_app/fleet_status.html',type_dict)
+    return render(request, 'main_app/fleet_status.html', type_dict)
 
 
 def select_section(request):
     return render(request, 'main_app/select_section.html')
+
+
+def add_to_cart(request):
+    item = request.POST.get('item_id').split('_')[1]
+    qty = request.POST.get('qty')
+    mode = request.POST.get('mode')
+    if mode == 'Add':
+        order_dict[item] = qty
+    else:
+        del order_dict[item]
+    # item = Item.objects.filter(item_id=kwargs.get('item_id', "")).first()
+    # print(kwargs)
+    # print(data)
+    # order_list.append(item)
+    # print(order_list)
+    print(order_dict)
+    return HttpResponse('')

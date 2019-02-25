@@ -26,7 +26,7 @@
                             <td class="align-middle">
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1"></label>
-                                    <select class="form-control" id="exampleFormControlSelect1"
+                                    <select class="form-control qty_selector" id="exampleFormControlSelect1"
                                             onfocus='this.size=10;' onblur='this.size=1;'
                                             onchange='this.size=1; this.blur();'>
                                         {% for i in i|rjust:part.item_quantity %}
@@ -41,6 +41,8 @@
                                 <img src="/{{ part.item_picture }}" alt="part_pic" class="img-thumbnail">
                             </td>
                             <td style="width: 16.66%" class="align-middle">
+                                {#                                 <a href="{% url 'main_app:add_to_cart' part.item_id %}" class="add_cart_btn btn btn-warning">Add to Cart</a>#}
+                                {#                                {% csrf_token %}#}
                                 <button id="btn_{{ part.item_id }}" class="btn btn-warning add_btn">Add</button>
                             </td>
                         </tr>
